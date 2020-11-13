@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.system.mapper.UserMapper">
+	<resultMap type="com.example.system.pojo.User" id="userResultMap">
+		<id property="id" column="u_id"/>
+		<result property="name" column="user_name"/>
+		<result property="age" column="user_age"/>
+		<result property="city" column="user_city"/>
+		<result property="sex" column="user_sex"/>
+		<result property="desc" column="user_desc"/>
+	</resultMap>
+	
+	<select id="list" resultMap="userResultMap">
+		select * from users
+	</select>
+	
+	<insert id="add" parameterType="com.example.system.pojo.User">
+		insert into users(user_name, user_age) values(#{name}, #{age})
+	</insert>
+	<delete id="delete" parameterType="int">
+		delete from users where u_id=#{id}
+	</delete>
+	<select id="get" parameterType="int" resultMap="userResultMap">
+		select * from users where u_id=#{xxx}
+	</select>
+	<select id="getbyname" parameterType="String" resultMap="userResultMap">
+		select * from users where user_name=#{xxx}
+	</select>
+	<update id="update" parameterType="com.example.system.pojo.User">
+		update users set user_name=#{name},user_age=#{age} where u_id=#{id}
+	</update>
+	<select id="getCount" resultType="int">
+		select count(*) from users
+	</select>
+</mapper>

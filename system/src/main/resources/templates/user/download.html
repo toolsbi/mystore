@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>down load file</title>
+</head>
+<body>
+<form th:action="@{/user/download}" method="post">
+    文件名:<input th:type="text" th:name="fileName"/><br/>
+    <input th:type="submit" th:value="下载"/>
+</form>
+
+</body>
+</html>

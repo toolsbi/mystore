@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>useragent</title>
+    <!-- 加载layui的样式表 -->
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+</head>
+<body>
+<!-- 数据表格 -->
+<table id="userList" lay-filter="userListFilter"></table>
+<!-- 加载layui的js -->
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+    //layui是一个全局对象，use方法会加载指定模块，这里是加载layer（弹出层）模块、和table（数据表格）模块
+    //加载完指定模块后，会调用回调方法
+    layui.use([ 'layer', 'table' ], function() {
+        // var layer = layui.layer;
+        var table = layui.table;
+        // var $ = layui.$;
+        //render是渲染表格的方法
+        //render方法会向url中的地址（数据接口）发送ajax请求，获取表格数据，渲染表格
+        table.render({
+            elem: '#userList',//表格的id
+            url: '/user/listData', //数据接口，从数据接口可以获取表格中的数据
+            height: 315,
+            page: true, //先关闭分页
+            //表头，二维数组，数组中的每个元素都是一个对象，代表了数据表格中的一列
+            cols: [
+                [
+                {
+                    field: 'id',//数据接口中的field
+                    title: 'ID',//显示在表格中的标题
+                    sort:true
+                }, {
+                    field: 'name',
+                    title: '用户名'
+                }, {
+                    field: 'age',
+                    title: '年龄'
+                }, {
+                    field: 'city',
+                    title: '城市'
+                }, {
+                    field: 'sex',
+                    title: '性别'
+                }, {
+                    field: 'desc',
+                    title: '描述'
+                }, {//这里的toolbar值是模板元素的选择器
+                    fixed: 'right',//固定到右端
+                    width: 200,
+                    align: 'center',
+                }]
+            ]
+        });
+    })
+</script>
+</body>
+</html>

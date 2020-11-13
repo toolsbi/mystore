@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>user list</title>
+</head>
+<body>
+    <table>
+        <thead>
+        <tr>
+            <th>id</th>
+            <th> 姓名</th>
+            <th>年龄</th>
+            <th>删除</th>
+            <th>修改</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  th:each="u:${users}">
+            <td th:text="${u.id}"></td>
+            <td th:text="${u.name}"></td>
+            <td th:text="${u.age}"></td>
+            <td><a th:href="@{/user/delete(id=${u.id})}">删除</a>&nbsp;&nbsp;<a th:href="@{/user/updateUI(id=${u.id})}">修改</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/user/addUI}">新增</a>
+</body>
+</html>
